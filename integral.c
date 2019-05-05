@@ -2,8 +2,8 @@
 #include <math.h>
 //関数定義
 double f(double x){
-  double sigma = 13;
-  double y= exp(-(x*x)/(2*sigma))/sqrt(2*M_PI*sigma);
+  double sigmma = 1;
+  double y= exp(-(x*x)/(2*sigmma))/sqrt(2*M_PI*sigmma);
   return y;
 }
 
