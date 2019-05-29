@@ -241,7 +241,7 @@ double RtrnRQ(int n, double a[][MaxDim], double result[][MaxDim]){
 		for(int j=0; j<n; j++){
 			if(i==j){//対角成分
 				r[i][j] = list[j];
-			}else　if(i<j){
+			}else if(i<j){
 				r[i][j] = VecIP(n, a_prm[j], b[i]);
 			}else{//ゼロになる
 				r[i][j] = 0.0;
