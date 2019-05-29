@@ -1,16 +1,9 @@
-//グラムシュミットの正規直交化法
-
 #include <stdio.h>
 #include <math.h>
 
 #define	MaxDim	4
-// 簡単のため，ベクトルのサイズも数も4とするが，当然サイズと数は違ってよい
-// その場合プログラムは微修正が必要
 
-
-/*
-ここに先週の VecIP から VecRNormalize までの全ての関数を書く
-*/
+//内積
 double	VecIP(int dim, const double u[], const double v[])
 {
 	int i;
@@ -102,18 +95,8 @@ double VecRNormalize(int dim, double trg[])
 
 
 
-/*
-グラム-シュミットの直交化法は，ベクトルの列の長さに関して帰納的である．
-そこで，d 項行ベクトル u[0], u[1], ..., u[k-1] が正規直交していて，
-さらに，u[0], u[1], ..., u[k-1], u[k] が，線形独立であるとき，trg を書き換えて，
-a) u[0], u[1], ..., u[k-1], trg は，正規直交
-b) u[0], u[1], ..., u[k-1], trg で張られる部分空間は，
-u[0], u[1], ..., u[k-1], u[k] で張られる部分空間と一致する
-ようにする関数 VecOrthogolize(k, d, u[][],trg[]) を定義せよ．
-ただし，元の u[0], u[1], ..., u[k] が線形独立ではないときは，関数の値は 0,
-線形独立のときは，関数の値は，0 以外の double とする．
-*/
 
+//ベクトルの直交化
 double VecOrthogonalize(int k, const double u[][MaxDim], double trg[MaxDim])
 {
 	int i;
@@ -226,12 +209,6 @@ double RtrnRQ(int n, double a[][MaxDim], double result[][MaxDim]){
 	double q[MaxDim][MaxDim];
 	double r[MaxDim][MaxDim];
 	double list[MaxDim];
-
-	for(int i=0; i<n; i++){
-		for(int j =0; j<n; j++){
-			r[i][j] = 0.0;
-		}
-	}
 	//step 1
 	for(int i=0; i<n; i++){
 		VecCopy(n, a[i], a_prm[i]);
@@ -247,7 +224,8 @@ double RtrnRQ(int n, double a[][MaxDim], double result[][MaxDim]){
 	Transpose(n, q);
 	//step 4
 
-	//rの対角成分の取得
+	//まずは Rの対角成分を取得
+
 	for(int i=0; i<n; i++){
 		VecCopy(n, a[i], a_prm[i]);
 	}
@@ -258,13 +236,15 @@ double RtrnRQ(int n, double a[][MaxDim], double result[][MaxDim]){
 		VecCopy(n, a[i], a_prm[i]);
 	}
 	Transpose(n, a_prm);
-
+//Rを作る
 	for(int i=0; i<n; i++){
-		for(int j=i; j<n; j++){
-			if(i==j){
+		for(int j=0; j<n; j++){
+			if(i==j){//対角成分
 				r[i][j] = list[j];
-			}else{
+			}else　if(i<j){
 				r[i][j] = VecIP(n, a_prm[j], b[i]);
+			}else{//ゼロになる
+				r[i][j] = 0.0;
 			}
 		}
 	}
