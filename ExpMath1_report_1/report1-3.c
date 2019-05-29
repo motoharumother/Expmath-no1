@@ -319,7 +319,7 @@ double RtrnRQ(int n, double a[][MaxDim], double result[][MaxDim]){
 	*/
 /*
 	//test
-	//しっかり　A=QxT(Q)　か・・
+	//しっかり　E=QxT(Q)　か・・
 	//double test[MaxDim][MaxDim];
 	double test_2[MaxDim][MaxDim];
 	for(int i=0; i<n; i++){
