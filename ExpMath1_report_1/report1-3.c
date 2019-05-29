@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define	MaxDim	3
+#define	MaxDim	4
 // 簡単のため，ベクトルのサイズも数も4とするが，当然サイズと数は違ってよい
 // その場合プログラムは微修正が必要
 
@@ -38,24 +38,6 @@ void	VecCopy(int dim, const double src[], double trg[])
 	int i;
 	for (i = 0; i < dim; ++i){
 		trg[i] = src[i];
-	}
-}
-
-// ベクトルの和：u + v -> trg
-void	VecPlus(int dim, const double u[], const double v[], double trg[])
-{
-	int i;
-	for (i = 0; i < dim; ++i){
-		trg[i] = u[i] + v[i];
-	}
-}
-
-// ベクトルの和：trg + v -> trg （データ書き換え版）
-void	VecRPlus(int dim, double trg[], const double v[])
-{
-	int i;
-	for (i = 0; i < dim; ++i){
-		trg[i] = trg[i] + v[i];
 	}
 }
 
@@ -316,9 +298,11 @@ double RtrnRQ(int n, double a[][MaxDim], double result[][MaxDim]){
 		VecPrint(MaxDim, q[i]);
 		}
 		printf("\n");
-
+*/
+/*
 	//test
 	//しっかり　A=QR　か・・
+
 	double test[MaxDim][MaxDim];
 	for(int i=0; i<n; i++){
 		for(int j=0; j<n; j++){
@@ -332,7 +316,8 @@ double RtrnRQ(int n, double a[][MaxDim], double result[][MaxDim]){
 	printf("Qr[%d] = ",i);
 	VecPrint(MaxDim, test[i]);
 	}
-
+	*/
+/*
 	//test
 	//しっかり　A=QxT(Q)　か・・
 	//double test[MaxDim][MaxDim];
@@ -362,12 +347,14 @@ double RtrnRQ(int n, double a[][MaxDim], double result[][MaxDim]){
 
 
 int main(){
-	double _v[MaxDim][MaxDim];
-	double a[MaxDim][MaxDim];
-	double b[MaxDim][MaxDim] = {{1,0,0},{0,2,0},{0,0,2}};
-	double p[MaxDim][MaxDim] = {{1,1,1},{1,2,2},{1,2,3}};
-	double in_p[MaxDim][MaxDim] = {{2,-1,0},{-1,2,-1},{0,-1,1}};
-	int dim = 3;
+	//double _v[MaxDim][MaxDim];
+	double a[MaxDim][MaxDim]={{2,0,0,-1},{0,2,-1,0},{0,-1,2,0},{-1,0,0,2}};
+	// ={{0,-1,0},{-1,0,0},{0,3,2}};
+	//double b[MaxDim][MaxDim] = {{1,0,0},{0,2,0},{0,0,2}};
+	//double p[MaxDim][MaxDim] = {{1,1,1},{1,2,2},{1,2,3}};
+	//double in_p[MaxDim][MaxDim] = {{2,-1,0},{-1,2,-1},{0,-1,1}};
+	int dim = 4;
+/*
 	for(int i=0; i<dim; i++){
 		for(int j=0; j<dim; j++){
 			_v[i][j] = 0.0;
@@ -384,41 +371,29 @@ int main(){
 				}
 			}
 		}
-printf("A0\n" );
-		for (int i = 0; i < dim; ++i) {
-		printf("result[%d] = ",i);
-		VecPrint(MaxDim, a[i]);
-		}
-		printf("\n");
-	//double trg[MaxDim][MaxDim]
-	//int i, n;
-
-	for (int k=1; k<1000; k++){
-		double result[MaxDim][MaxDim];
-		RtrnRQ(dim, a, result);
-		printf("A%d\n", k);
-		for (int i = 0; i < dim; ++i) {
-		printf("result[%d] = ",i);
-		VecPrint(MaxDim, result[i]);
-		}
-		//AにRxQを代入して次に進む
-		for(int i=0; i<dim; i++){
-			VecCopy(i, result[i], a[i]);
-		}
-		printf("\n");
-		}
-
-
-//グラムシュミットが完成したら次のコメントを外す
-/*
-printf("\n");
-n = VecGramSchmidt(dim, v, trg);
-for (i = 0; i < dim; ++i) {
-printf("trg[%d] = ",i);
-VecPrint(MaxDim, trg[i]);
-}
-printf("\nthe number of independent vectors = %d\n", n);
 */
+
+	printf("A0\n" );
+	for (int i = 0; i < dim; ++i) {
+	printf("result[%d] = ",i);
+	VecPrint(MaxDim, a[i]);
+	}
+	printf("\n");
+
+	for (int k=1; k<700; k++){
+	double result[MaxDim][MaxDim];
+	RtrnRQ(dim, a, result);
+	printf("A%d\n", k);
+	for (int i = 0; i < dim; ++i) {
+	printf("result[%d] = ",i);
+	VecPrint(MaxDim, result[i]);
+	}
+	//AにRxQを代入して次に進む
+	for(int i=0; i<dim; i++){
+	VecCopy(dim, result[i], a[i]);
+	}
+	printf("\n");
+	}
 
 return 0;
 }
