@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define	MaxDim	4
+#define	MaxDim	3
 
 //内積
 double	VecIP(int dim, const double u[], const double v[])
@@ -327,14 +327,14 @@ double RtrnRQ(int n, double a[][MaxDim], double result[][MaxDim]){
 
 
 int main(){
-	//double _v[MaxDim][MaxDim];
-	double a[MaxDim][MaxDim]={{2,0,0,-1},{0,2,-1,0},{0,-1,2,0},{-1,0,0,2}};
+	double _v[MaxDim][MaxDim];
+	double a[MaxDim][MaxDim];//={{2,0,0,-1},{0,2,-1,0},{0,-1,2,0},{-1,0,0,2}};
 	// ={{0,-1,0},{-1,0,0},{0,3,2}};
-	//double b[MaxDim][MaxDim] = {{1,0,0},{0,2,0},{0,0,2}};
-	//double p[MaxDim][MaxDim] = {{1,1,1},{1,2,2},{1,2,3}};
-	//double in_p[MaxDim][MaxDim] = {{2,-1,0},{-1,2,-1},{0,-1,1}};
-	int dim = 4;
-/*
+	double b[MaxDim][MaxDim] = {{10,0,0},{0,6,0},{0,0,-5}};
+	double p[MaxDim][MaxDim] = {{1,1,1},{1,2,2},{1,2,3}};
+	double in_p[MaxDim][MaxDim] = {{2,-1,0},{-1,2,-1},{0,-1,1}};
+	int dim = 3;
+
 	for(int i=0; i<dim; i++){
 		for(int j=0; j<dim; j++){
 			_v[i][j] = 0.0;
@@ -351,7 +351,7 @@ int main(){
 				}
 			}
 		}
-*/
+
 
 	printf("A0\n" );
 	for (int i = 0; i < dim; ++i) {
@@ -360,7 +360,7 @@ int main(){
 	}
 	printf("\n");
 
-	for (int k=1; k<700; k++){
+	for (int k=1; k<100; k++){
 	double result[MaxDim][MaxDim];
 	RtrnRQ(dim, a, result);
 	printf("A%d\n", k);
