@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 pi = np.pi
 x = np.arange(-pi, pi, pi/1000)
 
+#係数
 def bk(k):
     tmpb = (4/k**2)*np.cos(k*pi)
     return tmpb
-
+#Sn(x)の計算
 def Sn(n,b,x):
     y = np.zeros((n))
     sin_list = np.array([np.cos((k+1)*x) for k in range(n)])
@@ -31,8 +32,9 @@ for m, n in enumerate(nlist):
     for i, _x in enumerate(x):
         y[m][i] = Sn(n,b,_x)
     plt.plot(x, y[m], label='n={}'.format(n), alpha=0.4)
-    
+#２乗差
 er = [((x-y[i])**2).sum() for i in range(len(nlist))]
+#sup error
 superror = [(abs(x-y[i])).max() for i in range(len(nlist))]
     
 plt.plot(x, x**2, label='orignal')
