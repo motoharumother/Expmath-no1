@@ -5,12 +5,12 @@ pi = np.pi
 x = np.arange(-pi, pi, pi/1000)
 
 def bk(k):
-    tmpb = (-2/k)*np.cos(k*pi)
+    tmpb = (4/k**2)*np.cos(k*pi)
     return tmpb
 
 def Sn(n,b,x):
     y = np.zeros((n))
-    sin_list = np.array([np.sin((k+1)*x) for k in range(n)])
+    sin_list = np.array([np.cos((k+1)*x) for k in range(n)])
     sn = sin_list*b
     return sn.sum()
 
@@ -33,9 +33,9 @@ for m, n in enumerate(nlist):
     plt.plot(x, y[m], label='n={}'.format(n), alpha=0.4)
     
 er = [((x-y[i])**2).sum() for i in range(len(nlist))]
-errormax = [(abs(x-y[i])).max() for i in range(len(nlist))]
+superror = [(abs(x-y[i])).max() for i in range(len(nlist))]
     
-plt.plot(x, x, label='orignal')
+plt.plot(x, x**2, label='orignal')
 plt.legend()
 plt.show()
 
@@ -43,3 +43,5 @@ plt.plot(nlist, er)
 plt.scatter(nlist, er, color='r')
 plt.show()
 
+plt.plot(nlist, superror)
+plt.show()
