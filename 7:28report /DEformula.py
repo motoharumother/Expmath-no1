@@ -79,7 +79,7 @@ import matplotlib.pyplot as plt
 plt.plot(N, error_DEformul_n)
 plt.xscale('log')
 plt.yscale('log')
-plt.title('x^2+4x    [{0}:{1}]'.format(n,n))
+plt.title('x^2+4x    [{0}:{1}]'.format(-n,n))
 #plt.xlabel('N')
 plt.xlabel('Threshold  N')
 plt.ylabel('Error')

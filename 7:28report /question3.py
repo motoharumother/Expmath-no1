@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-T = 1
-n = 50
+T = 10
+n = 100
 dt = T/n
 t = np.arange(0,10,dt)
 
@@ -35,18 +35,31 @@ def Runge_kutta(y, dt, t):
 
 def SympleticEuler(y, dt, t):
     for i in range(len(t)-1):
-        A = np.linalg.inv(np.array([[1,-dt*y[0,i]],[dt*y[1,i], 1]]))
-        y[:,i+1] = np.dot(A,np.array([(1-2*dt)*y[0,i],(1+dt)*y[1,i]]))
+        y[0,i+1] = y[0,i] + dt*y[0,i]*(y[1,i]-2)
+        y[1,i+1] = y[1,i]/(1-dt*(1-y[0,i+1]))
+        #A = np.linalg.inv(np.array([[1,-dt*y[0,i]],[dt*y[1,i], 1]]))
+        #y[:,i+1] = np.dot(A,np.array([(1-2*dt)*y[0,i],(1+dt)*y[1,i]]))
     return y
 
 
 
 #y = ExEuler(y, dt, t)
-y = Runge_kutta(y, dt, t)
-#y = SympleticEuler(y, dt, t)
-plt.figure(figsize=(8,8))
+#y = Runge_kutta(y, dt, t)
+y = SympleticEuler(y, dt, t)
+plt.figure(figsize=(5,5))
 plt.plot(y[0], y[1])
+plt.scatter(y[0][0], y[1][0], label='t=0')
+plt.scatter(y[0][-1], y[1][-1], label='t=10')
 plt.xlabel('u')
 plt.ylabel('v')
-plt.show()
+plt.legend()
+#plt.title('Runge Kutta', fontdict={'fontsize':20})
+#plt.title('ExEuler', fontdict={'fontsize':20})
+plt.title('SympleticEuler', fontdict={'fontsize':20})
+
+#plt.savefig('Runge Kutta')
+#plt.savefig('ExEuler')
+#plt.savefig('SympleticEuler')
+
 #
+plt.show()
