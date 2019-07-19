@@ -9,9 +9,11 @@ x = np.arange(-pi, pi, pi/1000)
 def originalfunc(x):
     if np.sin(x)>0:
         return 1
+    elif np.sin(x)==0:
+        return 0
     else:
         return -1
-    
+
 #係数
 def ak(k):
     tmpa = integrate.quad(lambda x, c : (1/pi)*originalfunc(x)*np.cos(x*c), -pi, pi, args=k)[0]
@@ -30,7 +32,7 @@ def Sn(n,ak,bk,x):
     return sn.sum()
 
 
-nlist = np.arange(1,16,5)
+nlist = np.arange(1,100,10)
 
 y = np.zeros((len(nlist), len(x)))
 
@@ -56,7 +58,7 @@ for m, n in enumerate(nlist):
 er = [((x-y[i])**2).sum() for i in range(len(nlist))]
 #sup error
 superror = [(abs(x-y[i])).max() for i in range(len(nlist))]
-    
+
 
 plt.legend()
 plt.show()
@@ -68,4 +70,3 @@ plt.show()
 
 plt.plot(nlist, superror)
 plt.show()
-
