@@ -49,7 +49,7 @@ error_norlmalmethod_n = np.array([])
 for n in N:
     #print(h)
     #x = np.arange(-i,i,h)
-    h = 1/100
+    h = 1/10
     t = np.arange(-n,n,h)
     error_DEformul_n = np.append(error_DEformul_n, (DE_formula(t, h)-exact_value)**2)
     #if abs(DE_formula(t, h)-exact_value)<= 1e-10:

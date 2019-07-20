@@ -63,10 +63,10 @@ def MidpointRule(y, dt, t):
 
 
 #y = ExEuler(y, dt, t)
-y = Runge_kutta(y, dt, t)
+#y = Runge_kutta(y, dt, t)
 #y = SympleticEuler(y, dt, t)
 #y = ImEuler(y, dt, t)
-#y = MidpointRule(y, dt, t)
+y = MidpointRule(y, dt, t)
 #y = (ExEuler(y, dt, t)+ImEuler(y, dt, t))/2
 
 
@@ -78,18 +78,18 @@ plt.xlabel('u')
 plt.ylabel('v')
 plt.legend()
 
-plt.title('Runge Kutta', fontdict={'fontsize':20})
+#plt.title('Runge Kutta', fontdict={'fontsize':20})
 #plt.title('ExEuler', fontdict={'fontsize':20})
 #plt.title('SympleticEuler', fontdict={'fontsize':20})
 #plt.title('ImEuler', fontdict={'fontsize':20})
-#plt.title('MidpointRule', fontdict={'fontsize':20})
+plt.title('MidpointRule', fontdict={'fontsize':20})
 #plt.title('Ex-Im-Euler', fontdict={'fontsize':20})
 
 #plt.savefig('Runge Kutta')
 #plt.savefig('ExEuler')
 #plt.savefig('SympleticEuler')
 #plt.savefig('ImEuler')
-#plt.savefig('MidpointRule')
+plt.savefig('MidpointRule')
 
 
 #
