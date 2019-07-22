@@ -4,14 +4,14 @@ import matplotlib.pyplot as plt
 import time
 
 T = 10
-dt = 1e-2
+dt = 1e-1
 t = np.arange(0,T,dt)
 
 y = np.zeros((2,len(t)))
 
 y[0][0] = 2
-y[1][0] = 1        
-    
+y[1][0] = 1
+
 def f(x):
     X = x.copy()
     X[0] = x[0]*(x[1]-2)
@@ -61,12 +61,12 @@ def MidpointRule(y, dt, t):
         y[1,i+1] = a[-1][v]
     return y
 
-
+"""
 #y = ExEuler(y, dt, t)
 #y = Runge_kutta(y, dt, t)
 #y = SympleticEuler(y, dt, t)
 #y = ImEuler(y, dt, t)
-y = MidpointRule(y, dt, t)
+#y = MidpointRule(y, dt, t)
 #y = (ExEuler(y, dt, t)+ImEuler(y, dt, t))/2
 
 
@@ -82,15 +82,55 @@ plt.legend()
 #plt.title('ExEuler', fontdict={'fontsize':20})
 #plt.title('SympleticEuler', fontdict={'fontsize':20})
 #plt.title('ImEuler', fontdict={'fontsize':20})
-plt.title('MidpointRule', fontdict={'fontsize':20})
+#plt.title('MidpointRule', fontdict={'fontsize':20})
 #plt.title('Ex-Im-Euler', fontdict={'fontsize':20})
 
 #plt.savefig('Runge Kutta')
 #plt.savefig('ExEuler')
 #plt.savefig('SympleticEuler')
 #plt.savefig('ImEuler')
-plt.savefig('MidpointRule')
+#plt.savefig('MidpointRule')
 
 
-#
+plt.show()
+"""
+
+
+
+
+y = ExEuler(y, dt, t)
+error = (np.log(y[0,:])-y[0,:])-(y[1,:]-2*np.log(y[1,:]))-(np.log(2)-3)
+plt.plot(t, error, label='ExEuler')
+y = Runge_kutta(y, dt, t)
+error = (np.log(y[0,:])-y[0,:])-(y[1,:]-2*np.log(y[1,:]))-(np.log(2)-3)
+plt.plot(t, error, label='Runge_Kutta')
+y = SympleticEuler(y, dt, t)
+error = (np.log(y[0,:])-y[0,:])-(y[1,:]-2*np.log(y[1,:]))-(np.log(2)-3)
+plt.plot(t, error, label='SympleticEuler')
+y = ImEuler(y, dt, t)
+error = (np.log(y[0,:])-y[0,:])-(y[1,:]-2*np.log(y[1,:]))-(np.log(2)-3)
+plt.plot(t, error, label='ImEuler')
+y = MidpointRule(y, dt, t)
+error = (np.log(y[0,:])-y[0,:])-(y[1,:]-2*np.log(y[1,:]))-(np.log(2)-3)
+plt.plot(t, error, label='MidpointRule')
+
+plt.title('H = log(u)-u-v+2log(v)-log(2)+3', fontdict={'fontsize':20})
+#plt.title('ExEuler error', fontdict={'fontsize':20})
+#plt.title('SympleticEuler error', fontdict={'fontsize':20})
+#plt.title('ImEuler error', fontdict={'fontsize':20})
+#plt.title('MidpointRule error', fontdict={'fontsize':20})
+#plt.title('Ex-Im-Euler error', fontdict={'fontsize':20})
+
+#plt.savefig('Runge Kutta'error)
+#plt.savefig('ExEuler error')
+#plt.savefig('SympleticEuler error')
+#plt.savefig('ImEuler error')
+#plt.savefig('MidpointRule error')
+
+error = (np.log(y[0,:])-y[0,:])-(y[1,:]-2*np.log(y[1,:]))-(np.log(2)-3)
+plt.plot(t, error)
+plt.xlabel('t')
+plt.ylabel('H')
+plt.legend()
+
 plt.show()
